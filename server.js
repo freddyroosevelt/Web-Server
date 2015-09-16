@@ -10,7 +10,8 @@ var mimes = {
     ".js" : "text/javascript",
     ".gif" : "image/gif",
     ".jpg" : "image/jpg",
-    ".png" : "image/png"
+    ".png" : "image/png",
+    ".json": "application/json"
 }
 
 var server = http.createServer(function(req, res) {
@@ -20,18 +21,7 @@ var server = http.createServer(function(req, res) {
     // Check to see if the file exists or not
     fs.exists(filePath, function(file_exists) {
         if(file_exists) {
-
-            // Read and Serve Basics without a Stream
-            /*fs.readFile(filePath, function(err, content) {
-                if(err){
-                    res.writeHead(500);
-                    res.end();
-                }else {
-                    res.writeHead(200, { 'Content-Type' : contentType});
-                    res.end(content, 'utf-8');
-                }
-            })*/
-
+            
             // Read and Serve in a more Efficient way using Streams
             res.writeHead(200, { 'Content-Type' : contentType});
             var streamFile = fs.createReadStream(filePath).pipe(res);
