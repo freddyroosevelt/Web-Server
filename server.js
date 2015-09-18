@@ -25,6 +25,16 @@ var server = http.createServer(function(req, res) {
             // Read and Serve in a more Efficient way using Streams
             res.writeHead(200, { 'Content-Type' : contentType});
             var streamFile = fs.createReadStream(filePath).pipe(res);
+            
+            //Uncomment to run a example .json file in the browers.
+            /*
+            var obj = {
+                firstname: 'John',
+                lastname: 'Doe'
+            };
+            
+            res.end(JSON.stringify(obj));
+            */
 
             // event listener for possible errors
             streamFile.on('err', function() {
